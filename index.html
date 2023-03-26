@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="big-box">
+        <div class="box">
+            <form name="contact" action="">
+                <fieldset style="border: 0;">
+                    <div class="text-box">
+                        <h1>CONTACT US</h1>
+                        <p>Hit us up with your amazing thoughts</p>
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" placeholder="Name" id="name" required>
+                    </div>
+                    <div class="input-field">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" placeholder="Email" id="email" required>
+                    </div>
+                    <div class="input-field" style="margin-bottom: 5px;">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" placeholder="Phone Number" id="phone-number" required>
+                    </div>
+                    <div id="message_box">
+                    </div>
+                    <div class="btn-field">
+                        <button type="submit">Submit</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="catalog">
+            <img src="images/home.jpg" alt="">
+        </div>
+    </div>
+    <script>
+ $(function() {
+  function sendData($form) {
+    let dataString = $form.serialize();
+
+    return $.ajax({
+      type: $form.attr('method'),
+      url: $form.attr('action'),
+      data: dataString,
+    });
+  }
+
+  $("form").on("submit", function(e) {
+    e.preventDefault();
+
+    sendData($(this)).done(function() {
+      $(".big-box .box #message_box").html("<div id='message' style='font-size:14px'></div>");
+
+      $(".big-box .box #message")
+        .html("<p>Contact Form Submitted!</p>")
+        .append("<p>We will be in touch soon.</p>")
+        .hide()
+        .fadeIn(1500);
+    });
+  });
+});
+    </script>
+</body>
+
+</html>
